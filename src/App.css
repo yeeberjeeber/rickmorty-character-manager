@@ -18,6 +18,63 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Navbar.css */
+nav {
+  background-color: #20232a;
+  padding: 1rem 2rem;
+  font-family: Arial, sans-serif;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-evenly; /* evenly spaces all items */
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0; /* spacing controlled by flex */
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #61dafb;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s, transform 0.2s;
+}
+
+nav a:hover {
+  color: #21a1f1;
+  transform: translateY(-2px);
+}
+
+nav a.active {
+  color: #ffffff;
+  font-weight: 700;
+  border-bottom: 2px solid #61dafb;
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  nav li:not(:last-child)::after {
+    display: none; /* remove divider in vertical layout */
+  }
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
