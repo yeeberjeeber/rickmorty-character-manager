@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Route, Routes } from 'react-router'
 import Navbar from './components/Navbar'
 import CharListPage from './pages/CharListPage'
-import OneCharPage from './pages/AirCharPage'
+import OneCharPage from './pages/OneCharPage'
+import YourCharListPage from './pages/YourCharListPage'
 import './App.css'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<h2>Home</h2>} />
         <Route path="/characters" element={<CharListPage />} />
         <Route path="/characters/:charId" element={<OneCharPage />} />
+        <Route path="/characters/yours" element={<YourCharListPage />} />
         {/* <Route path="/characters/new" element={<CreatePetPage />} />
         <Route path="/characters/:charId/edit" element={<EditPetForm />} /> */}
       </Routes>

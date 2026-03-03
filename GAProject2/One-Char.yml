@@ -1,0 +1,33 @@
+info:
+  name: One-Char
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://api.airtable.com/v0/appD9Mfx9vtkZLFXY/tblmPp5KYYhrQHRSz?scope=data.records:write
+  headers:
+    - name: Authorization
+      value: Bearer {{process.env.AIRTABLE_TOKEN}}
+  params:
+    - name: scope
+      value: data.records:write
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "fields": {
+          "CharID" : 3,
+          "Name": "Rick Sanchez",
+          "Gender": "Male",
+          "Species": "Human"
+        }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

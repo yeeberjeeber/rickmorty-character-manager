@@ -11,7 +11,7 @@ export default function Navbar() {
           <NavLink to="/characters">Characters</NavLink>
         </li>
         <li>
-          <NavLink to="/characters/2">One</NavLink>
+          <NavLink to="/characters/yours">Your Characters</NavLink>
         </li>
         <li>
           <NavLink to="/characters/new">New</NavLink>
