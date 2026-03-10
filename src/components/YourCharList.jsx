@@ -4,6 +4,7 @@ import { Link } from "react-router";
 /**
  * @typedef {{
  *   id: string;
+ *   charId: string;
  *   name: string;
  *   image: { url: string }[];
  * }} Char
@@ -25,7 +26,7 @@ export default function YourCharList({ chars }) {
               style={{ display: "block", margin: "0 auto" }}
             />
           )}
-          <Link to={`/characters/yours/${char.id}`} className="char-name">
+          <Link to={`/characters/yours/${char.charId}`} className="char-name">
             {char.name}
           </Link>
         </div>

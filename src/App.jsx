@@ -8,7 +8,6 @@ import YourOneCharPage from './pages/YourOneCharPage'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -20,8 +19,6 @@ function App() {
         <Route path="/characters/:charId" element={<OneCharPage />} />
         <Route path="/characters/yours" element={<YourCharListPage />} />
         <Route path="/characters/yours/:charId" element={<YourOneCharPage />} />
-        {/* <Route path="/characters/new" element={<CreatePetPage />} />
-        <Route path="/characters/:charId/edit" element={<EditPetForm />} /> */}
       </Routes>
     </>
   )

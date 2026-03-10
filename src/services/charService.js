@@ -30,6 +30,7 @@ export async function getAllAirChar() {
 
     const chars = result.records.map(record => ({
       id: record.id,
+      charId: record.fields.CharID,
       name: record.fields.Name,
       image: record.fields.Image || [], // include Image array
     }));
@@ -56,7 +57,7 @@ export async function getOneChar(charId) {
 }
 
 export async function getOneAirChar(charId) {
-  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASEID}/${import.meta.env.VITE_AIRTABLE_TABLEID}/${charId}`;
+  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASEID}/${import.meta.env.VITE_AIRTABLE_TABLEID}?filterByFormula=CharID=${charId}`;
 
   try {
     const response = await fetch(url, {
@@ -69,18 +70,20 @@ export async function getOneAirChar(charId) {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+    const result = await response.json();
+    if (!result.records || result.records.length === 0) return null;
 
-    const record = await response.json();
+    const record = result.records[0];
 
     // record.fields is your object
     return {
       id: record.id,
+      charId: record.fields.CharID,
       name: record.fields.Name,
       gender: record.fields.Gender,
       species: record.fields.Species,
       image: record.fields.Image || [],
       status: record.fields.Status,
-      type: record.fields.Type,
       origin: record.fields.Origin,
       location: record.fields.Location,
       episodes: record.fields.Episodes

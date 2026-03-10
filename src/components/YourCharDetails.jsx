@@ -9,7 +9,6 @@ import { deleteChar } from "../services/charService";
  * @property {string} gender
  * @property {string} species
  * @property {string} status
- * @property {string} type
  * @property {string} origin
  * @property {string} location
  * @property {{url: string}[]} image
@@ -49,10 +48,6 @@ export default function YourCharDetails({ char }) {
 
           <div className="info-box">
             <p><strong>Species:</strong> {char.species || "unknown"}</p>
-          </div>
-
-          <div className="info-box">
-            <p><strong>Type:</strong> {char.type || "N/A"}</p>
           </div>
 
           <div className="info-box">

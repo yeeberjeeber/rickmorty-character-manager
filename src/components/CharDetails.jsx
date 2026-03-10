@@ -1,16 +1,17 @@
 //@ts-check
-
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { deleteChar, createChar } from "../services/charService";
+import { createChar } from "../services/charService";
+import { getAllAirChar } from "../services/charService";
 
 /**
  * /**
  * @typedef {Object} Char
- * @property {number} id
+ * @property {string} id
+ * @property {string} charId
  * @property {string} name
  * @property {string} status
  * @property {string} species
- * @property {string} type
  * @property {string} gender
  * @property {{name:string, url:string}} origin
  * @property {{name:string, url:string}} location
@@ -22,6 +23,20 @@ import { deleteChar, createChar } from "../services/charService";
  */
 export default function CharDetails({ char }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [isAdded, setIsAdded] = useState(false);
+
+  useEffect(() => {
+    const checkIfAdded = async () => {
+      /** @type {Char[]} */
+      const allChars = await getAllAirChar(); // fetch all Airtable chars
+      const exists = allChars.some((c) => char.id === c.charId);
+      setIsAdded(exists);
+      setLoading(false);
+    };
+
+    checkIfAdded();
+  }, [char]);
 
   const handleAdd = async () => {
     await createChar({
@@ -30,11 +45,10 @@ export default function CharDetails({ char }) {
       Gender: char.gender,
       Species: char.species,
       Status: char.status,
-      Type: char.type || "N/A",
       Origin: char.origin?.name || "Unknown",
       Location: char.location?.name || "Unknown",
       Image: [{ url: char.image }],
-      Episodes: char.episode.join(", ") // or JSON.stringify(char.episode)
+      Episodes: char.episode.join(", ") 
     });
     navigate("/characters");
   }
@@ -56,12 +70,6 @@ export default function CharDetails({ char }) {
       <div className="info-box">
         <p><strong>Species:</strong> {char.species || "unknown"}</p>
       </div>
-
-      {char.type && (
-        <div className="info-box">
-          <p><strong>Type:</strong> {char.type}</p>
-        </div>
-      )}
 
       <div className="info-box">
         <p><strong>Gender:</strong> {char.gender || "unknown"}</p>
@@ -99,7 +107,9 @@ export default function CharDetails({ char }) {
     </div>
 
     <div className="char-card-buttons">
-      <button onClick={handleAdd} className="add-button">Add</button>
+      <button onClick={handleAdd} className="add-button" disabled={loading || isAdded}>
+        {loading ? "Checking..." : isAdded ? "Added" : "Add"}
+      </button>
     </div>
   </div>
 </div>
