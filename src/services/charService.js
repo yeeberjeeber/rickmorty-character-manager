@@ -1,5 +1,5 @@
-export async function getAllChar() {
-  const url = "https://rickandmortyapi.com/api/character";
+export async function getAllChar(page = 1) {
+  const url = `https://rickandmortyapi.com/api/character?page=${page}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -7,7 +7,10 @@ export async function getAllChar() {
     }
 
     const result = await response.json();
-    return result.results;
+    return {
+      results: result.results,
+      info: result.info
+    }
   } catch (error) {
     console.error(error);
   }
