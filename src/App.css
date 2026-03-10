@@ -8,10 +8,9 @@
 body, html, #root {
   height: 100%;
   font-family: 'Orbitron', Arial, sans-serif;
-  background: url('/images/sci-fi-bg.jpg');
+  background: url('./images/sci-fi-bg.jpg') no-repeat center center fixed;
   background-size: cover;
-  background-blend-mode: overlay;
-  background-color: #0f0c29; /* dark overlay if image is transparent */
+
   color: #fff;
 }
 
@@ -194,8 +193,10 @@ nav a.active {
 
 /* Main card wrapper — horizontal rectangle with vertically centered image */
 .char-details-card-rect {
-  display: flex;
-  flex-direction: row;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #2c2f36;
   border-radius: 12px;
   padding: 20px;
