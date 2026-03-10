@@ -7,6 +7,18 @@ import YourCharListPage from './pages/YourCharListPage'
 import YourOneCharPage from './pages/YourOneCharPage'
 import './App.css'
 
+function Home() {
+  return (
+      <p className="home-story">
+        The multiverse is chaotic, and the Citadel of Ricks can't keep track of everyone! 
+        Alternate Ricks, countless Mortys, and strange alien species are everywhere. 
+        Your mission? Explore the multiverse, inspect characters, and organize them into a 
+        manageable system — all powered by the interdimensional Rick & Morty API.
+      </p>
+  );
+}
+
+
 function App() {
 
   return (
@@ -14,7 +26,7 @@ function App() {
       <h1>Rick & Morty Character List</h1>
       <Navbar />
       <Routes>
-        <Route path="/" element={<h2>Home</h2>} />
+        <Route path="/" element={<Home />} />
         <Route path="/characters" element={<CharListPage />} />
         <Route path="/characters/:charId" element={<OneCharPage />} />
         <Route path="/characters/yours" element={<YourCharListPage />} />

@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+body, html, #root {
+  height: 100%;
+  font-family: 'Orbitron', Arial, sans-serif;
+  background: url('/images/sci-fi-bg.jpg');
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-color: #0f0c29; /* dark overlay if image is transparent */
+  color: #fff;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -319,5 +329,24 @@ nav a.active {
   background-color: #cccccc; /* grey */
   cursor: not-allowed;
   transform: none;
-  color: #666666;
+  color: #666667;
+}
+
+/* Story paragraph */
+.home-story {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 80vh;
+  max-width: 700px;
+  margin: 20px auto 40px;
+  font-size: 1.3rem;
+  line-height: 1.7;
+  text-shadow:
+    0 0 5px #0ff,
+    0 0 10px #0ff,
+    0 0 20px #0ff,
+    0 0 30px #0ff;
+  color: #00ffff;
 }
