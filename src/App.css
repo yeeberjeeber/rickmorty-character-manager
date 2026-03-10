@@ -1,4 +1,4 @@
-#root {
+#root, .page-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -107,10 +107,180 @@ nav a.active {
   }
 }
 
+/* Character Grid */
+.char-grid {
+  display: flex;
+  flex-wrap: wrap;          /* allow items to wrap to next row */
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 140px;
+}
+
+/* Card Style */
+.char-card {
+  background: #2c2f36;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* space image and text evenly */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  width: 220px;   /* fixed width matching your grid minmax */
+  height: 300px;  /* fixed height so all cards align */
+  box-sizing: border-box; /* include padding in height/width */
+}
+
+.char-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+}
+
+.char-card a {
+  text-decoration: none;
+  color: #61dafb;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.char-card a:hover {
+  color: #21a1f1;
+}
+
+.char-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.char-name {
+  text-decoration: none;
+  color: #61dafb;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.char-name:hover {
+  color: #21a1f1;
+}
+
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+.page-content {
+  width: 100%;
+  display: block;
+}
+
+/* Main card wrapper — horizontal rectangle with vertically centered image */
+.char-details-card-rect {
+  display: flex;
+  flex-direction: row;
+  background: #2c2f36;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 750px;
+  width: 90%;
+  margin: 2rem auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  gap: 20px;
+  align-items: center; /* <-- this centers image vertically */
+}
+
+/* Image */
+.char-card-image-rect {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Content area */
+.char-card-content-rect {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  gap: 16px;
+}
+
+/* Character name */
+.char-card-name {
+  color: #61dafb;
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+}
+
+/* Grid for info boxes */
+.char-card-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px;
+}
+
+/* Individual info boxes */
+.info-box {
+  background: #3a3d47;
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: left;  /* left-align text */
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Links inside boxes */
+.info-box a {
+  color: #21a1f1;
+  text-decoration: none;
+}
+
+.info-box a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.char-card-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: flex-end; /* push buttons to the right */
+  width: 100%; /* ensure it spans full content area */
+}
+
+.add-button, .delete-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-button {
+  background-color: #61dafb;
+  color: #20232a;
+}
+
+.add-button:hover {
+  background-color: #21a1f1;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
 }

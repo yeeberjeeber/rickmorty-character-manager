@@ -17,7 +17,7 @@ export async function getAllAirChar() {
   const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASEID}/${import.meta.env.VITE_AIRTABLE_TABLEID}`;
   try {
     const response = await fetch(url, {
-    method: "GET",
+      method: "GET",
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
       },
@@ -28,12 +28,10 @@ export async function getAllAirChar() {
 
     const result = await response.json();
 
-    // map Airtable records to array of Char objects
     const chars = result.records.map(record => ({
       id: record.id,
       name: record.fields.Name,
-      gender: record.fields.Gender,
-      species: record.fields.Species
+      image: record.fields.Image || [], // include Image array
     }));
 
     return chars;
@@ -54,6 +52,41 @@ export async function getOneChar(charId) {
     return result;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function getOneAirChar(charId) {
+  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASEID}/${import.meta.env.VITE_AIRTABLE_TABLEID}/${charId}`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const record = await response.json();
+
+    // record.fields is your object
+    return {
+      id: record.id,
+      name: record.fields.Name,
+      gender: record.fields.Gender,
+      species: record.fields.Species,
+      image: record.fields.Image || [],
+      status: record.fields.Status,
+      type: record.fields.Type,
+      origin: record.fields.Origin,
+      location: record.fields.Location,
+      episodes: record.fields.Episodes
+    };
+  } catch (error) {
+    console.error("Failed to fetch character:", error);
   }
 }
 
@@ -79,20 +112,23 @@ export async function createChar(data) {
   }
 }
 
-//Pending some work here
-export async function deleteChar(petId) {
-  const url = `http://localhost:3000/pets/${petId}`;
+export async function deleteChar(charId) {
+  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASEID}/${import.meta.env.VITE_AIRTABLE_TABLEID}/${charId}`;
   try {
     const response = await fetch(url, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
+      },
     });
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
     const result = await response.json();
-    console.log(result);
+    return result;
   } catch (error) {
-    console.error(error.message);
+    console.error("Failed to delete character:", error.message);
   }
 }

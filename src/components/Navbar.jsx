@@ -13,12 +13,12 @@ export default function Navbar() {
         <li>
           <NavLink to="/characters/yours">Your Characters</NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/characters/new">New</NavLink>
         </li>
         <li>
           <NavLink to="/characters/2/edit">Edit</NavLink>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

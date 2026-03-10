@@ -2,25 +2,34 @@
 import { Link } from "react-router";
 
 /**
- * @typedef {{ id: string, name: string, gender: string, species: string }} Char
- * @param {{ chars: Char[]}} param0
- * @returns
+ * @typedef {{
+ *   id: string;
+ *   name: string;
+ *   image: { url: string }[];
+ * }} Char
+ *
+ * @param {{ chars: Char[] }} props
  */
-
-export default function YourCharList( { chars } ) {
-  if (chars.length === 0) {
-    return <p>No Characters Available</p>;
-  }
+export default function YourCharList({ chars }) {
+  if (chars.length === 0) return <p>No Characters Available</p>;
 
   return (
-    <>
-      <ul>
-        {chars.map((char) => (
-          <li key={char.id}>
-            <Link to={`/characters/${char.id}`}>{char.name}</Link>
-          </li>
-        ))}
-      </ul>
-    </>
+    <div className="char-grid">
+      {chars.map((char) => (
+        <div className="char-card" key={char.id}>
+          {char.image && char.image.length > 0 && (
+            <img
+              src={char.image[0].url}
+              alt={char.name}
+              className="char-image"
+              style={{ display: "block", margin: "0 auto" }}
+            />
+          )}
+          <Link to={`/characters/yours/${char.id}`} className="char-name">
+            {char.name}
+          </Link>
+        </div>
+      ))}
+    </div>
   );
 }

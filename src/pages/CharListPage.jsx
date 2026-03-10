@@ -16,11 +16,9 @@ export default function CharListPage() {
 
   return (
     <>
-      <header>Rick and Morty Character Database</header>
-      <hr />
-      <aside>
+      <div className="page-container">
         <CharList chars={chars} />
-      </aside>
+      </div>
     </>
   );
 }

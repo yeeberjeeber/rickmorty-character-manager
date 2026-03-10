@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: https://rickandmortyapi.com/api/character
+  url: https://rickandmortyapi.com/api/character/
   auth: inherit
 
 settings:
