@@ -115,13 +115,11 @@ export default function CharDetails({ char }) {
 
     <div className="char-card-buttons">
       {from === "yours" ? (
-        <button onClick={handleDelete} className="delete-button">
-          Delete
-        </button>
+        <button onClick={handleDelete} className="delete-button">Delete</button>
+      ) : loading ? (
+        <button className="add-button" disabled>Checking...</button>
       ) : (
-        <button onClick={handleAdd} className="add-button" disabled={loading || isAdded}>
-          {loading ? "Checking..." : isAdded ? "Added" : "Add"}
-        </button>
+        <button onClick={handleAdd} className="add-button" disabled={isAdded}>{isAdded ? "Added" : "Add"}</button>
       )}
     </div>
   </div>
