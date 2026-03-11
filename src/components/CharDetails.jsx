@@ -1,7 +1,7 @@
 //@ts-check
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { createChar } from "../services/charService";
+import { useNavigate, useLocation } from "react-router";
+import { createChar, deleteChar } from "../services/charService";
 import { getAllAirChar } from "../services/charService";
 
 /**
@@ -23,6 +23,8 @@ import { getAllAirChar } from "../services/charService";
  */
 export default function CharDetails({ char }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state.from; 
   const [loading, setLoading] = useState(true);
   const [isAdded, setIsAdded] = useState(false);
 
@@ -51,6 +53,11 @@ export default function CharDetails({ char }) {
       Episodes: char.episode.join(", ") 
     });
     navigate("/characters");
+  }
+
+  const handleDelete = async () => {
+      await deleteChar(char.id);
+      navigate("/characters/yours");
   }
 
   return (
@@ -107,9 +114,15 @@ export default function CharDetails({ char }) {
     </div>
 
     <div className="char-card-buttons">
-      <button onClick={handleAdd} className="add-button" disabled={loading || isAdded}>
-        {loading ? "Checking..." : isAdded ? "Added" : "Add"}
-      </button>
+      {from === "yours" ? (
+        <button onClick={handleDelete} className="delete-button">
+          Delete
+        </button>
+      ) : (
+        <button onClick={handleAdd} className="add-button" disabled={loading || isAdded}>
+          {loading ? "Checking..." : isAdded ? "Added" : "Add"}
+        </button>
+      )}
     </div>
   </div>
 </div>

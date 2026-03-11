@@ -19,7 +19,7 @@ export default function CharList( { chars } ) {
             {char.image && (
               <img src={char.image} alt={char.name} className="char-image" />
             )}
-            <Link to={`/characters/${char.id}`} className="char-name">
+            <Link to={`/characters/${char.id}`} state={{from: "all"}} className="char-name">
               {char.name}
             </Link>
           </div>

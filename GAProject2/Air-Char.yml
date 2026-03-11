@@ -5,10 +5,14 @@ info:
 
 http:
   method: GET
-  url: https://api.airtable.com/v0/appD9Mfx9vtkZLFXY/tblmPp5KYYhrQHRSz
+  url: https://api.airtable.com/v0/appD9Mfx9vtkZLFXY/tblmPp5KYYhrQHRSz?filterByFormula=CharID=2
   headers:
     - name: Authorization
       value: Bearer {{process.env.AIRTABLE_TOKEN}}
+  params:
+    - name: filterByFormula
+      value: CharID=2
+      type: query
   auth: inherit
 
 settings:
