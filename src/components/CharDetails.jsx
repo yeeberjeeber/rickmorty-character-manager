@@ -24,7 +24,7 @@ import { getAllAirChar } from "../services/charService";
 export default function CharDetails({ char }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state.from; 
+  //const from = location.state.from; 
   const [loading, setLoading] = useState(true);
   const [isAdded, setIsAdded] = useState(false);
   const [airTableId, setAirTableId] = useState("");
@@ -119,13 +119,12 @@ export default function CharDetails({ char }) {
     </div>
 
     <div className="char-card-buttons">
-      {from === "yours" ? (
+      {!loading && (
+        isAdded ? (
         <button onClick={handleDelete} className="delete-button">Delete</button>
-      ) : loading ? (
-        <button className="add-button" disabled>Checking...</button>
       ) : (
         <button onClick={handleAdd} className="add-button" disabled={isAdded}>{isAdded ? "Added" : "Add"}</button>
-      )}
+      ))}
     </div>
   </div>
 </div>

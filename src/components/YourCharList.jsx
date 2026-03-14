@@ -26,7 +26,7 @@ export default function YourCharList({ chars }) {
               style={{ display: "block", margin: "0 auto" }}
             />
           )}
-          <Link to={`/characters/${char.charId}`} state={{from: "yours"}} className="char-name">
+          <Link to={`/characters/${char.charId}`} className="char-name">
             {char.name}
           </Link>
         </div>
