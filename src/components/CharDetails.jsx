@@ -27,13 +27,18 @@ export default function CharDetails({ char }) {
   const from = location.state.from; 
   const [loading, setLoading] = useState(true);
   const [isAdded, setIsAdded] = useState(false);
+  const [airTableId, setAirTableId] = useState("");
 
   useEffect(() => {
     const checkIfAdded = async () => {
       /** @type {Char[]} */
       const allChars = await getAllAirChar(); // fetch all Airtable chars
       const exists = allChars.some((c) => char.id === c.charId);
+      const record = allChars.find((c) => char.id === c.charId);
       setIsAdded(exists);
+      if (record) {
+        setAirTableId(record.id);
+      }
       setLoading(false);
     };
 
@@ -56,7 +61,7 @@ export default function CharDetails({ char }) {
   }
 
   const handleDelete = async () => {
-      await deleteChar(char.id);
+      await deleteChar(airTableId);
       navigate("/characters/yours");
   }
 
